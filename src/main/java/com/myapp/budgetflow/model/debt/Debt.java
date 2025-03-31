@@ -14,12 +14,13 @@ public class Debt {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long debtId;
+    @Column(name = "debt_id")
+    private Long id;
 
     private String title;
     private String description;
     private BigDecimal value;
-    private LocalDate due_date;
+    private LocalDate dueDate;
 
     @Enumerated(EnumType.STRING)
     private Status status;

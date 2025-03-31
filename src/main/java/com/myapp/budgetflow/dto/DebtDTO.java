@@ -8,11 +8,11 @@ import java.time.LocalDate;
 
 @Data
 public class DebtDTO {
-    private Long debtId;
+    private Long id;
     private String title;
     private String description;
     private BigDecimal value;
-    private LocalDate due_date;
+    private LocalDate dueDate;
     private Status status;
     private String category;
 }
