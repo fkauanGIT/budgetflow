@@ -1,6 +1,5 @@
-package com.myapp.budgetflow.model.debt;
+package com.myapp.budgetflow.model;
 
-import com.myapp.budgetflow.model.user.User;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -17,17 +16,24 @@ public class Debt {
     @Column(name = "debt_id")
     private Long id;
 
+    @Column(nullable = false)
     private String title;
+
     private String description;
+
+    @Column(nullable = false)
     private BigDecimal value;
+
+    @Column(nullable = false)
     private LocalDate dueDate;
 
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    @Column(nullable = false)
     private String category;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
 }
