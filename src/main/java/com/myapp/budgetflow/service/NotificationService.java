@@ -1,7 +1,7 @@
 package com.myapp.budgetflow.service;
 
-import com.myapp.budgetflow.model.debt.Debt;
-import com.myapp.budgetflow.model.user.User;
+import com.myapp.budgetflow.model.Customer;
+import com.myapp.budgetflow.model.Debt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -14,7 +14,7 @@ public class NotificationService {
     private JavaMailSender javaMailSender;
 
     public void sendNotificationExpiration(Debt debt) {
-        User usuario = debt.getUser();
+        Customer usuario = debt.getCustomer();
         String mensagem = String.format(
                 "Olá %s, sua dívida '%s' no valor de R$%.2f vence em %s.",
                 usuario.getUsername(),
