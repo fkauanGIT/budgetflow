@@ -49,7 +49,7 @@ public class SecurityConfig {
                     }
                 }))
                 .csrf(csrfConfig -> csrfConfig.csrfTokenRequestHandler(csrfTokenRequestAttributeHandler)
-                        .ignoringRequestMatchers( "/register", "/login")
+                        .ignoringRequestMatchers( "/register", "/login", "/customer/**")
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
                 .addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
@@ -60,7 +60,7 @@ public class SecurityConfig {
 //                .requiresChannel(rcc -> rcc.anyRequest().requiresSecure()) // Only HTTPS
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/debts").hasRole("USER")
-                        .requestMatchers("/customers").hasRole("ADMIN")
+                        .requestMatchers("/customer").hasRole("ADMIN")
                         .requestMatchers("/register", "/login").permitAll()
                         .requestMatchers("/user").authenticated()
                         .anyRequest().authenticated());

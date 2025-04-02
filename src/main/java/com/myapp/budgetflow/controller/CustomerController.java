@@ -15,7 +15,6 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/customers")
 public class CustomerController {
 
     private final CustomerRepository customerRepository;
@@ -38,6 +37,18 @@ public class CustomerController {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).
                         body("User registration failed");
             }
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).
+                    body("An exception occurred: " + ex.getMessage());
+        }
+    }
+
+    @DeleteMapping("/customer/{id}")
+    public ResponseEntity<String> deleteCustomer(@PathVariable Long id) {
+        try {
+            customerRepository.deleteById(id);
+            return ResponseEntity.status(HttpStatus.OK).
+                    body("User deleted successfully");
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).
                     body("An exception occurred: " + ex.getMessage());
